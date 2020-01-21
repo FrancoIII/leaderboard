@@ -5,8 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body
+            {% block additionnal_body_block %}
+            {% endblock %}
+            class="theme-indigo
+            {% block additionnal_body_class %}
+            {% endblock %}">
     </body>
 </html>
