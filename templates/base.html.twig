@@ -1,15 +1,114 @@
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body
-            {% block additionnal_body_block %}
-            {% endblock %}
-            class="theme-indigo
-            {% block additionnal_body_class %}
-            {% endblock %}">
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="Content-Type" content="UTF-8">
+    <meta name="Content-Language" content="fr">
+    <meta name="Description" content="GInfo - Association d'informatique de Centrale Marseille">
+    <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
+    <meta name="Copyright" content="GINFO">
+    <meta name="Revisit-After" content="15 days">
+    <title>{% block titre_page %}GInfo{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+    {% block page_css %}
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+
+<body {% block additionnal_body_block %}{% endblock %} class="theme-indigo {% block additionnal_body_class %}{% endblock %}">
+
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% if is_granted('ROLE_USER') %}
+                {% block mobile_collapse %}
+                    <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                {% endblock %}
+                <a href="javascript:void(0);" class="bars"></a>
+            {% endif %}
+
+            <a class="navbar-brand" href="/home">
+                GINFO
+            </a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="">
+                            <i class="material-icons">settings</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('user_logout') }}">
+                            <i class="material-icons">power_settings_new</i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section>
+    <aside id="leftsidebar" class="sidebar">
+        <div class="menu">
+            <ul class="list">
+                <li class="header">Menu</li>
+                <li {% if app.request.pathInfo starts with "/page1" %}class="active"{% endif %}>
+                    <a href="/page1">
+                        <i class="material-icons">search</i> <span>Page 1</span>
+                    </a>
+                </li>
+                <li {% if app.request.pathInfo starts with "/page2" %}class="active"{% endif %}>
+                    <a href="/page2" id="link_add">
+                        <i class="material-icons">add</i> <span>Page 2</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
+</section>
+
+<div class="footer">
+    <div class="footer-content">
+        <b>GInfo</b> 2019 - <a href="https://assos.centrale-marseille.fr/ginfo">GInfo</a> -
+        <a href="">Mentions légales</a> - <a href="">Données personnelles</a> - <a href="https://wiki.centrale-marseille.fr/ginfo/">Documentation</a>
+    </div>
+</div>
+
+<div id="app-notifs">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="notif" data-type="{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<script src="{{ asset('build/vendor.js') }}"></script>
+<script src="{{ asset('build/app.js') }}"></script>
+<script src="{{ asset('build/runtime.js') }}"></script>
+
+
+{% block page_js %}
+{% endblock %}
+</body>
+
 </html>
