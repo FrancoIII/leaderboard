@@ -34,7 +34,7 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="array")
      */
     private $roles;
 
@@ -116,12 +116,12 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
-    public function setRoles(json_array $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 

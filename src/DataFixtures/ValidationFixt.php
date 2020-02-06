@@ -7,15 +7,11 @@ use App\Entity\User;
 use App\Entity\Validation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;
 
-class ValidationFixt extends Fixture
+class ValidationFixt extends Fixture implements DependentFixtureInterface
 {
-    public function getOrder()
-    {
-        return 4;
-    }
-
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -38,5 +34,12 @@ class ValidationFixt extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            ChallengeFixt::class,
+        );
     }
 }

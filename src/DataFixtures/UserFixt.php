@@ -9,11 +9,6 @@ use Faker;
 
 class UserFixt extends Fixture
 {
-    public function getOrder()
-    {
-        return 1;
-    }
-
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -27,7 +22,7 @@ class UserFixt extends Fixture
                 ->setEmail("$firstName.$lastName@ntm.com")
                 ->setUsername("$firstName[0]$lastName")
                 ->setPassword($faker->password)
-                ->setRoles(["ROLE_USER"])
+                ->setRoles(array(["ROLE_USER"]))
                 ->setScore(0);
 
             $manager->persist($user);
@@ -42,7 +37,7 @@ class UserFixt extends Fixture
                 ->setEmail("$firstName.$lastName@ntm.com")
                 ->setUsername("$firstName[0]$lastName")
                 ->setPassword($faker->password)
-                ->setRoles(["ROLE_USER", "ROLE_ADMIN"])
+                ->setRoles(array(["ROLE_USER", "ROLE_ADMIN"]))
                 ->setScore(0);
 
             $manager->persist($user);
