@@ -23,7 +23,7 @@ class Validation
      * @ORM\JoinColumn(nullable=false)
      */
     private $createdBy;
-
+// La doc a l'air de dire que pour l'unicité d'un couple d'entités, on mets pas le unique = true
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Challenge", inversedBy="validations")
      * @ORM\JoinColumn(nullable=false)
