@@ -1,8 +1,19 @@
+<!DOCTYPE html>
 
-
-{% extends 'base.html.twig' %}
-
-{% block page_css %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="Content-Type" content="UTF-8">
+    <meta name="Content-Language" content="fr">
+    <meta name="Description" content="GInfo - Association d'informatique de Centrale Marseille">
+    <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
+    <meta name="Copyright" content="GINFO">
+    <meta name="Revisit-After" content="15 days">
+    <title>{% if is_granted('ROLE_USER') %}TEST{% else %}Login{% endif %}</title>
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
     <style>
         .login_body{
             background: lightgrey;
@@ -10,37 +21,70 @@
             height: 100%;
         }
     </style>
-{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
 
-{% block titre_page %}{% if is_granted('ROLE_USER') %}TEST{% else %}Login{% endif %}{% endblock %}
+<body class="theme-brown {% if is_granted('ROLE_USER') %}{% else %}login_body{% endif %}">
 
-{% block additionnal_body_class %}{% if is_granted('ROLE_USER') %}{% else %}login_body{% endif %}{% endblock %}
-
-{% block content %}
-    {% if is_granted('ROLE_USER') %}
-        On liste les challenges
-    {% else %}
-        <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="card col-md-4">
-                <div class="cheader bg-brown align-center">
-                    <h2>
-                        Login
-                    </h2>
+<section class="">
+    <div class="container-fluid">
+        {% if is_granted('ROLE_USER') %}
+            On liste les challenges
+        {% else %}
+            <div class="row" style="margin-top: 10%;">
+                <div class="col-md-4">
                 </div>
+                <div class="card col-md-4">
+                    <div class="cheader bg-brown align-center">
+                        <h2>
+                            Login
+                        </h2>
+                    </div>
 
-                <div class="body align-center">
-                    <input type="text" placeholder="Username"/>
-                    <br/>
-                    <input type="text" placeholder="Password"/>
-                    <br/>
-                    <br/>
-                    <button type="submit">Login</button>
+                    <div class="body align-center">
+                        <input type="text" placeholder="Username" class="form-control"/>
+                        <br/>
+                        <input type="text" placeholder="Password" class="form-control"/>
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-success waves-effect btn-lg">Login</button>
+                        <br/>
+                        <br/>
+                        <button type="button" class="btn bg-indigo waves-effect btn-lg">Connexion via MyCA</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
                 </div>
             </div>
-            <div class="col-md-4">
+        {% endif %}
+    </div>
+</section>
+
+<div class="footer">
+    <div class="footer-content align-center">
+        <b>GInfo</b> 2020 - <a href="https://assos.centrale-marseille.fr/ginfo">GInfo</a> -
+        <a href="">Mentions légales</a> - <a href="">Données personnelles</a> - <a href="https://wiki.centrale-marseille.fr/ginfo/">Documentation</a>
+    </div>
+</div>
+
+<div id="app-notifs">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="notif" data-type="{{ type }}">
+                {{ message }}
             </div>
-        </div>
-    {% endif %}
-{% endblock %}
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<script src="{{ asset('build/vendor.js') }}"></script>
+<script src="{{ asset('build/app.js') }}"></script>
+<script src="{{ asset('build/runtime.js') }}"></script>
+
+</body>
+
+</html>
