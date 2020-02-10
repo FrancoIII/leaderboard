@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta name="Keywords" content="ginfo, groupe, informatique, it, association">
     <meta name="Copyright" content="GINFO">
     <meta name="Revisit-After" content="15 days">
-    <title>{% block titre_page %}GInfo{% endblock %}</title>
+    <title>{% block titre_page %}GInfo Leaderboard{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
@@ -23,7 +23,7 @@
           rel="stylesheet">
 </head>
 
-<body {% block additionnal_body_block %}{% endblock %} class="theme-indigo {% block additionnal_body_class %}{% endblock %}">
+<body {% block additionnal_body_block %}{% endblock %} class="theme-brown {% block additionnal_body_class %}{% endblock %}">
 
 <nav class="navbar">
     <div class="container-fluid">
@@ -35,8 +35,8 @@
                 <a href="javascript:void(0);" class="bars"></a>
             {% endif %}
 
-            <a class="navbar-brand" href="/home">
-                GINFO
+            <a class="navbar-brand" href="/">
+                Leaderboard
             </a>
 
         </div>
@@ -59,26 +59,6 @@
     </div>
 </nav>
 
-<section>
-    <aside id="leftsidebar" class="sidebar">
-        <div class="menu">
-            <ul class="list">
-                <li class="header">Menu</li>
-                <li {% if app.request.pathInfo starts with "/page1" %}class="active"{% endif %}>
-                    <a href="/page1">
-                        <i class="material-icons">search</i> <span>Page 1</span>
-                    </a>
-                </li>
-                <li {% if app.request.pathInfo starts with "/page2" %}class="active"{% endif %}>
-                    <a href="/page2" id="link_add">
-                        <i class="material-icons">add</i> <span>Page 2</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
-</section>
-
 <section class="content">
     <div class="container-fluid">
         {% block content %}
@@ -87,8 +67,8 @@
 </section>
 
 <div class="footer">
-    <div class="footer-content">
-        <b>GInfo</b> 2019 - <a href="https://assos.centrale-marseille.fr/ginfo">GInfo</a> -
+    <div class="footer-content align-center">
+        <b>GInfo</b> 2020 - <a href="https://assos.centrale-marseille.fr/ginfo">GInfo</a> -
         <a href="">Mentions légales</a> - <a href="">Données personnelles</a> - <a href="https://wiki.centrale-marseille.fr/ginfo/">Documentation</a>
     </div>
 </div>
@@ -102,6 +82,7 @@
         {% endfor %}
     {% endfor %}
 </div>
+
 <script src="{{ asset('build/vendor.js') }}"></script>
 <script src="{{ asset('build/app.js') }}"></script>
 <script src="{{ asset('build/runtime.js') }}"></script>
