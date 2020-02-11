@@ -21,7 +21,7 @@ class Challenge
     private $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=191, unique=true)
      */
     private $name;
 
