@@ -59,12 +59,14 @@
     </div>
 </nav>
 
+{% block supra_content %}
 <section class="content">
     <div class="container-fluid">
         {% block content %}
         {% endblock %}
     </div>
 </section>
+{% endblock %}
 
 <div class="footer">
     <div class="footer-content align-center">
