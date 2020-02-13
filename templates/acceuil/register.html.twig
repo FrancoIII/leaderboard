@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
+
+{% block titre_page %}{% if is_granted('ROLE_USER') %}TEST{% else %}Login{% endif %}{% endblock %}
+
+{% block supra_content %}
+<section class="">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 10%;">
+            <div class="col-md-4">
+            </div>
+            <div class="card col-md-4">
+                <div class="header bg-brown align-center">
+                    <h2>
+                        Register
+                    </h2>
+                </div>
+                {{ form_start(form) }}
+                <div class="body align-center">
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                </div>
+                <div class="card-footer align-center">
+                    <button type="submit" class="btn bg-green waves-effect btn-card-footer">
+                        <span>Envoyer</span></button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
