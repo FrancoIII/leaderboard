@@ -9,7 +9,8 @@
         <div class="row" style="margin-top: 10%;">
             <div class="col-md-4">
             </div>
-            <div class="card col-md-4">
+            <div class="col-md-4">
+            <div class="card">
                 <div class="header bg-brown align-center">
                     <h2>
                         Register
@@ -22,12 +23,14 @@
                     {{ form_row(form.username) }}
                     {{ form_row(form.email) }}
                     {{ form_row(form.password) }}
+                    {{ form_row(form.confirmpassword) }}
                 </div>
                 <div class="card-footer align-center">
                     <button type="submit" class="btn bg-green waves-effect btn-card-footer">
                         <span>Envoyer</span></button>
                 </div>
                 {{ form_end(form) }}
+            </div>
             </div>
             <div class="col-md-4">
             </div>

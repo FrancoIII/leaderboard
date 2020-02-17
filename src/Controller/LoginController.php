@@ -7,24 +7,23 @@ use App\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AcceuilController extends AbstractController
+class LoginController extends AbstractController
 {
     /**
-     * @Route("/", name="acceuil")
+     * @Route("/login", name="login")
      */
-    public function index()
+    public function login()
     {
-        return $this->render('acceuil/index.html.twig', [
-            'controller_name' => 'AcceuilController',
-        ]);
+        return $this->render('security/index.html.twig');
     }
 
 
     /**
      * @Route("/register", name="registration")
      */
-    public function registration(Request $request){
+    public function registration(Request $request, UserPasswordEncoderInterface $encoder){
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
 
@@ -33,13 +32,22 @@ class AcceuilController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $user->setRoles(["ROLE_USER"])
                 ->setScore(0);
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();
         }
 
-        return $this->render('acceuil/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
+
     }
 }

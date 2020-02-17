@@ -1,13 +1,33 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm : bcrypt
     providers:
         in_memory: { memory: null }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
+            anonymous: true
+
+            provider: in_database
+
+            form_login:
+                login_path: login
+                check_path: login
+
+            logout:
+                path: logout
+                target: /
+
+    role_hierarchy:
+        ROLE_ADMIN : ROLE_USER
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

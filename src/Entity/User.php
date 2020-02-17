@@ -6,13 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("username")
  * @UniqueEntity("email")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -33,8 +35,14 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length( min = 6, max = 18, minMessage="Le mot de passe doit contenir au moins {{ limit }} charactères", maxMessage="Le mot de passe doit contenir au max {{ limit }} charactères")
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath = "password", message = "Les passwords doivent être égaux")
+     */
+    public $confirmpassword;
 
     /**
      * @ORM\Column(type="array")
@@ -258,5 +266,15 @@ class User
         }
 
         return $this;
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

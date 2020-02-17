@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block titre_page %}Login{% endblock %}
+
+{% block supra_content %}
+<section class="">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 10%;">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            <div class="card">
+                <div class="header bg-brown align-center">
+                    <h2>
+                        Login
+                    </h2>
+                </div>
+                <div class="body align-center">
+                    <form action="{{ path('login') }}" method="post">
+                        <input type="text" placeholder="Username" class="form-control" name="_username" required/>
+                        <br/>
+                        <input type="password" placeholder="Password" class="form-control" name="_password" required/>
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-success waves-effect btn-lg">Login</button>
+                    </form>
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn bg-indigo waves-effect btn-lg" href="#">Connexion via MyCA</button>
+                </div>
+                <a href="/register"> Créer un compte </a>
+            </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
