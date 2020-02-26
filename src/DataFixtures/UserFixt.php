@@ -3,9 +3,10 @@
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
+use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixt extends Fixture
 {
@@ -21,7 +22,7 @@ class UserFixt extends Fixture
                 ->setLastName($lastName)
                 ->setEmail("$firstName.$lastName@ntm.com")
                 ->setUsername("$firstName[0]$lastName")
-                ->setPassword($faker->password)
+                ->setPassword(sha1($faker->colorName))
                 ->setRoles(array(["ROLE_USER"]))
                 ->setScore(0);
 

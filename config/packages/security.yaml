@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\User:
-            algorithm : bcrypt
+            algorithm : sha1
     providers:
         in_memory: { memory: null }
         in_database:
@@ -13,8 +13,13 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+
+        login:
+            pattern: ^/login|register
             anonymous: true
+
+        main:
+            anonymous: false
 
             provider: in_database
 

@@ -3,6 +3,7 @@
 {% block titre_page %}Login{% endblock %}
 
 {% block supra_content %}
+
 <section class="">
     <div class="container-fluid">
         <div class="row" style="margin-top: 10%;">
@@ -13,6 +14,9 @@
                 <div class="header bg-brown align-center">
                     <h2>
                         Login
+                        {% if error %}
+                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
                     </h2>
                 </div>
                 <div class="body align-center">
@@ -26,7 +30,7 @@
                     </form>
                     <br/>
                     <br/>
-                    <button type="button" class="btn bg-indigo waves-effect btn-lg" href="#">Connexion via MyCA</button>
+                    <button type="button" class="btn bg-indigo waves-effect btn-lg" href="/loginMy">Connexion via MyCA</button>
                 </div>
                 <a href="/register"> Créer un compte </a>
             </div>
