@@ -71,7 +71,8 @@ class LoginController extends AbstractController
                     $user->setEmail($data['email']);
                     $user->setLastname($data['nom']);
                     $user->setFirstName($data['prenom']);
-
+                    $user->setScore(0);
+                    $user->setRoles(["ROLE_USER"]);
 
                     $userManager->persist($user);
                     $userManager->flush();
