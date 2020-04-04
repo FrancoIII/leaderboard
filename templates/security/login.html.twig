@@ -14,25 +14,24 @@
                 <div class="header bg-brown align-center">
                     <h2>
                         Login
-                        {% if error %}
-                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
                     </h2>
                 </div>
                 <div class="body align-center">
                     <form action="{{ path('login') }}" method="post">
-                        <input type="text" placeholder="Username" class="form-control" name="_username" required/>
+                        <input type="text" placeholder="Username" class="form-control" name="_username" required />
                         <br/>
-                        <input type="password" placeholder="Password" class="form-control" name="_password" required/>
+                        <input type="password" placeholder="Password" class="form-control" name="_password" required />
                         <br/>
                         <br/>
                         <button type="submit" class="btn btn-success waves-effect btn-lg">Login</button>
                     </form>
                     <br/>
                     <br/>
-                    <button type="button" class="btn bg-indigo waves-effect btn-lg" href="/loginMy">Connexion via MyCA</button>
+                    <form action="{{ path('loginMy') }}" method="get">
+                        <button type="submit" class="btn bg-indigo waves-effect btn-lg">Connexion via MyCA</button>
+                    </form>
                 </div>
-                <a href="/register"> Créer un compte </a>
+                <a href="{{ path('registration') }}"> Créer un compte </a>
             </div>
             </div>
             <div class="col-md-4">

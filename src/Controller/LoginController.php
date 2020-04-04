@@ -28,9 +28,13 @@ class LoginController extends AbstractController
         if ( $error != Null ){
             $this->addFlash('error', $error->getMessage());
         }
-        return $this->render('security/login.html.twig', [
-            'error' => $error
-        ]);
+
+        if($this->getUser() != Null){
+            $this->addFlash('success', 'Vous êtes connecté');
+            return $this->redirectToRoute('default');
+        }
+
+        return $this->render('security/login.html.twig');
     }
 
     /**
@@ -112,6 +116,9 @@ class LoginController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();
+
+            $this->addFlash('success', 'Utilisateur créé, veuillez vous connecter');
+            return $this->redirectToRoute('default');
         }
 
         return $this->render('security/register.html.twig', [

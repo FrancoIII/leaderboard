@@ -10,6 +10,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixt extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -20,9 +27,9 @@ class UserFixt extends Fixture
             $lastName = $faker->lastName;
             $user->setFirstName($firstName)
                 ->setLastName($lastName)
-                ->setEmail("$firstName.$lastName@ntm.com")
-                ->setUsername("$firstName[0]$lastName")
-                ->setPassword(sha1($faker->colorName))
+                ->setEmail("$firstName.$lastName$i@ntm.com")
+                ->setUsername("$firstName$lastName$i")
+                ->setPassword($this->encoder->encodePassword($user, $faker->colorName))
                 ->setRoles(array(["ROLE_USER"]))
                 ->setScore(0);
 
@@ -35,9 +42,9 @@ class UserFixt extends Fixture
             $lastName = $faker->lastName;
             $user->setFirstName($firstName)
                 ->setLastName($lastName)
-                ->setEmail("$firstName.$lastName@ntm.com")
-                ->setUsername("$firstName[0]$lastName")
-                ->setPassword($faker->password)
+                ->setEmail("$firstName.$lastName$i@ntm.com")
+                ->setUsername("$firstName$lastName$i")
+                ->setPassword($this->encoder->encodePassword($user, $faker->colorName))
                 ->setRoles(array(["ROLE_USER", "ROLE_ADMIN"]))
                 ->setScore(0);
 
