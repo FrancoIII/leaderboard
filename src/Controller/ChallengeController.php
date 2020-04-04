@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\Challenge;
 use App\Form\ReponseType;
+use App\Entity\Attempt;
 
 class ChallengeController extends AbstractController
 {
@@ -44,7 +45,19 @@ class ChallengeController extends AbstractController
             if($challenge->getPassword()==$fakeChallenge->getPassword()){
                 return $this->redirectToRoute('challenge_success', ['id'=>$challenge->getId()]);
             }
-            return $this->redirectToRoute('challenge_failure', ['id'=>$challenge->getId()]);
+
+            $datetime = new \DateTime();
+            $attempt = new Attempt();
+            $attempt->setChallenge($challenge)
+                ->setAttemptedBy($this->getUser())
+                ->setAttempt($fakeChallenge->getPassword())
+                ->setAttemptedOn($datetime);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($attempt);
+            $em->flush();
+
+            $this->addFlash('failure', "Ce n'est pas la solution ! Try again ;)");
         }
 
         return $this->render('challenge/rep.html.twig',[
@@ -60,16 +73,6 @@ class ChallengeController extends AbstractController
      * @ParamConverter("challenge", class="App\Entity\Challenge")
      */
     public function success(Request $request, Challenge $challenge){
-        //mec comprends moi j'ai la flemme
-        return $this->render('base.html.twig');
-    }
-
-    /**
-     * @Route("/failure/{id}", name="challenge_failure")
-     * @Security("is_granted('ROLE_USER')")
-     * @ParamConverter("challenge", class="App\Entity\Challenge")
-     */
-    public function failure(Request $request, Challenge $challenge){
         //mec comprends moi j'ai la flemme
         return $this->render('base.html.twig');
     }
