@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/bootstrap_3_layout.html.twig' %}
+
+
+{% block content %}
+    <div class="card">
+        <div class="header" style="text-align: center;">
+            <h1>
+                {{ challenge.name }}
+            </h1>
+            Par {{ challenge.createdBy.username }}<br/>
+            Difficulté : {{ challenge.difficulty }}; Récompense : {{ challenge.reward }}
+        </div>
+        <div class="body">
+            {{ challenge.description }}
+            {{ form_start(form) }}
+                <div class="body align-center">
+                    <h3>Faire une tentative</h3>
+                    {{ form_row(form.password) }}
+                </div>
+                <div class="card-footer align-center">
+                    <button type="submit" class="btn bg-green waves-effect btn-card-footer">
+                        <span>Essayer !</span></button>
+                </div>
+            {{ form_end(form) }}
+            Dernière validation par {{ lastValidation.createdBy.username }}, le {{ lastValidation.validatedOn|date('j/m/Y à h:i') }}
+        </div>
+    </div>
+{% endblock %}

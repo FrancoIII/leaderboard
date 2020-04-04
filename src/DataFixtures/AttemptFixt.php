@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Challenge;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use App\Entity\Attempt;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;

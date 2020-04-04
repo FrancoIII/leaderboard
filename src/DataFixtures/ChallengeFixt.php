@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use App\Entity\Challenge;
 use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -32,7 +32,7 @@ class ChallengeFixt extends Fixture implements DependentFixtureInterface
                 ->setPassword($faker->password)
                 ->setCreatedOn($faker->dateTime)
                 ->setDifficulty(rand(1, 5))
-                ->setReward(rand(1, 50))
+                ->setReward(rand(1, 50)*$challenge->getDifficulty())
                 ->setCreatedBy($repoU->findOneBy(['id'=>$adminlist[$i%5]]));
 
             $manager->persist($challenge);

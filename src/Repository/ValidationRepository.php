@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Challenge;
 use App\Entity\Validation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,6 +18,10 @@ class ValidationRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Validation::class);
+    }
+
+    public function getLastValidation(Challenge $challenge){
+        return $this->findOneBy(['challenge' => $challenge], ['validatedOn' => 'DESC']);
     }
 
     // /**
