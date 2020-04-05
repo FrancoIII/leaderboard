@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChallengeRepository")
@@ -52,6 +53,12 @@ class Challenge
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\Range(
+     *     min = 1,
+     *     max = 5,
+     *     minMessage = "La difficulté est un nombre supérieur à {{ limit }}",
+     *     maxMessage = "La difficulté est un nombre inférieur à {{ limit }}"
+     * )
      */
     private $difficulty;
 

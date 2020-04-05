@@ -14,18 +14,17 @@
         <div class="body">
             {{ challenge.description|raw }}
             {{ form_start(form) }}
-                <div class="body align-center">
-                    <h3>Faire une tentative</h3>
-                    {{ form_row(form.password) }}
-                </div>
-                <div class="card-footer align-center">
-                    <button type="submit" class="btn bg-green waves-effect btn-card-footer">
-                        <span>Essayer !</span></button>
-                </div>
+            <div class="body align-center">
+                <h3>Bravo, c'est la bonne réponse !</h3>
+                Pour valider ce challenge, donne-lui une note !
+                {{ form_row(form.feedback) }}
+            </div>
+            <div class="card-footer align-center">
+                <button type="submit" class="btn bg-green waves-effect btn-card-footer">
+                    <span>Essayer !</span></button>
+            </div>
             {{ form_end(form) }}
-            {% if lastValidation %}
-            Dernière validation par {{ lastValidation.createdBy.username }}, le {{ lastValidation.validatedOn|date('j/m/Y à h:i') }}
-            {% endif %}
+            Dernière validation par toi, maintenant !
         </div>
     </div>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ValidationRepository")
@@ -37,6 +38,12 @@ class Validation
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\Range(
+     *     min = 1,
+     *     max = 5,
+     *     minMessage = "La note de feedback est un nombre supérieur à {{ limit }}",
+     *     maxMessage = "La note de feedback est un nombre inférieur à {{ limit }}"
+     * )
      */
     private $feedback;
 

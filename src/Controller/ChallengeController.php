@@ -10,6 +10,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\Challenge;
 use App\Form\ReponseType;
 use App\Entity\Attempt;
+use App\Form\ChallengeType;
+use App\Form\ValidationType;
+use App\Entity\Validation;
+use App\Entity\User;
 
 class ChallengeController extends AbstractController
 {
@@ -73,7 +77,64 @@ class ChallengeController extends AbstractController
      * @ParamConverter("challenge", class="App\Entity\Challenge")
      */
     public function success(Request $request, Challenge $challenge){
-        //mec comprends moi j'ai la flemme
-        return $this->render('base.html.twig');
+
+        $validation = new Validation();
+
+        $form = $this->createForm(ValidationType::class, $validation);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            $date = new \DateTime();
+            /** @var User $user */
+            $user = $this->getUser();
+            $validation->setCreatedBy($user)
+                ->setChallenge($challenge)
+                ->setValidatedOn($date);
+
+            $user->setScore($user->getScore() + $challenge->getReward());
+
+            $em->persist($user);
+            $em->persist($validation);
+            $em->flush();
+
+            return $this->redirectToRoute('challenge');
+        }
+
+        return $this->render('challenge/valid.html.twig', [
+            'form' => $form->createView(),
+            'challenge' => $challenge,
+        ]);
+    }
+
+    /**
+     * @Route("/creer", name="challenge_creer")
+     * @Security("is_granted('ROLE_USER')")
+     * @ParamConverter("challenge", class="App\Entity\Challenge")
+     */
+    public function creer(Request $request, ?Challenge $challenge){
+
+        $challenge = new  Challenge();
+
+        $form = $this->createForm(ChallengeType::class, $challenge);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            $date = new \DateTime();
+            $challenge->setCreatedOn($date)
+                ->setCreatedBy($this->getUser());
+
+            $em->persist($challenge);
+            $em->flush();
+
+            return $this->redirectToRoute('challenge');
+        }
+
+        return $this->render('challenge/creer.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
