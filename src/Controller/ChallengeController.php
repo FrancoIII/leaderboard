@@ -45,15 +45,31 @@ class ChallengeController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            /** @var User $user */
+            $user = $this->getUser();
 
             if($challenge->getPassword()==$fakeChallenge->getPassword()){
+                $validation = new Validation();
+                $em = $this->getDoctrine()->getManager();
+
+                $date = new \DateTime();
+                $validation->setCreatedBy($user)
+                    ->setChallenge($challenge)
+                    ->setValidatedOn($date);
+
+                $user->setScore($user->getScore() + $challenge->getReward());
+
+                $em->persist($user);
+                $em->persist($validation);
+                $em->flush();
+
                 return $this->redirectToRoute('challenge_success', ['id'=>$challenge->getId()]);
             }
 
             $datetime = new \DateTime();
             $attempt = new Attempt();
             $attempt->setChallenge($challenge)
-                ->setAttemptedBy($this->getUser())
+                ->setAttemptedBy($user)
                 ->setAttempt($fakeChallenge->getPassword())
                 ->setAttemptedOn($datetime);
 
@@ -74,11 +90,12 @@ class ChallengeController extends AbstractController
     /**
      * @Route("/success/{id}", name="challenge_success")
      * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('HAS_VALIDATED', challenge)")
      * @ParamConverter("challenge", class="App\Entity\Challenge")
      */
     public function success(Request $request, Challenge $challenge){
 
-        $validation = new Validation();
+        $validation = $this->getDoctrine()->getRepository('App:Validation')->getValidationOf($challenge, $this->getUser());
 
         $form = $this->createForm(ValidationType::class, $validation);
         $form->handleRequest($request);
@@ -86,16 +103,6 @@ class ChallengeController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
 
-            $date = new \DateTime();
-            /** @var User $user */
-            $user = $this->getUser();
-            $validation->setCreatedBy($user)
-                ->setChallenge($challenge)
-                ->setValidatedOn($date);
-
-            $user->setScore($user->getScore() + $challenge->getReward());
-
-            $em->persist($user);
             $em->persist($validation);
             $em->flush();
 

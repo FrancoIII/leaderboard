@@ -13,18 +13,26 @@
         </div>
         <div class="body">
             {{ challenge.description|raw }}
-            {{ form_start(form) }}
+            {% if is_granted('HAS_VALIDATED', challenge) %}
                 <div class="body align-center">
-                    <h3>Faire une tentative</h3>
-                    {{ form_row(form.password) }}
+                    <h3>
+                        Tu a déjà validé ce challenge !
+                    </h3>
                 </div>
-                <div class="card-footer align-center">
-                    <button type="submit" class="btn bg-green waves-effect btn-card-footer">
-                        <span>Essayer !</span></button>
-                </div>
-            {{ form_end(form) }}
+            {% else %}
+                {{ form_start(form) }}
+                    <div class="body align-center">
+                        <h3>Faire une tentative</h3>
+                        {{ form_row(form.password) }}
+                    </div>
+                    <div class="card-footer align-center">
+                        <button type="submit" class="btn bg-green waves-effect btn-card-footer">
+                            <span>Essayer !</span></button>
+                    </div>
+                {{ form_end(form) }}
+            {% endif %}
             {% if lastValidation %}
-            Dernière validation par {{ lastValidation.createdBy.username }}, le {{ lastValidation.validatedOn|date('j/m/Y à h:i') }}
+                Dernière validation par {{ lastValidation.createdBy.username }}, le {{ lastValidation.validatedOn|date('j/m/Y à h:i') }}
             {% endif %}
         </div>
     </div>

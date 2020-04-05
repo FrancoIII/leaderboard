@@ -38,6 +38,18 @@ class ChallengeFixt extends Fixture implements DependentFixtureInterface
             $manager->persist($challenge);
         }
 
+        /** @var User $tocard */
+        $tocard = $manager->getRepository('App:User')->findOneBy(['username' => 'tocard']);
+        $challenge->setName("Who is foder")
+            ->setDescription("La question est simple, mais comporte un <b>piège</b>.<br/><h5>Qui est foder ?</h5>")
+            ->setPassword('jsp')
+            ->setCreatedOn($faker->dateTime)
+            ->setDifficulty(1)
+            ->setReward(500)
+            ->setCreatedBy($tocard);
+
+        $manager->persist($challenge);
+
         $manager->flush();
     }
 

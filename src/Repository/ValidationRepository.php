@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Challenge;
+use App\Entity\User;
 use App\Entity\Validation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -24,6 +25,9 @@ class ValidationRepository extends ServiceEntityRepository
         return $this->findOneBy(['challenge' => $challenge], ['validatedOn' => 'DESC']);
     }
 
+    public function getValidationOf(Challenge $challenge, User $user){
+        return $this->findOneBy(['challenge' => $challenge, 'createdBy' => $user]);
+    }
     // /**
     //  * @return Validation[] Returns an array of Validation objects
     //  */

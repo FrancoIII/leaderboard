@@ -51,6 +51,17 @@ class UserFixt extends Fixture
             $manager->persist($user);
         }
 
+        $user = new User();
+        $user->setUsername('tocard')
+            ->setEmail('tocard@ginfo.xyz')
+            ->setFirstName('Alex')
+            ->setLastName('Pilouf')
+            ->setRoles(array(["ROLE_USER", "ROLE_ADMIN"]))
+            ->setPassword($this->encoder->encodePassword($user,'faible'))
+            ->setScore(1000);
+
+        $manager->persist($user);
+
         $manager->flush();
     }
 }

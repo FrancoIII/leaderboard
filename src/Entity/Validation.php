@@ -37,7 +37,7 @@ class Validation
     private $validatedOn;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(
      *     min = 1,
      *     max = 5,
