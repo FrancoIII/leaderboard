@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Challenge;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -17,6 +18,14 @@ class ChallengeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Challenge::class);
+    }
+
+    public function getCreatedChallenges(User $user){
+        $qb = $this->createQueryBuilder('v')
+            ->andWhere('v.createdBy = :user')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getArrayResult();
     }
 
     // /**

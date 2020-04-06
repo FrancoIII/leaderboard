@@ -28,6 +28,38 @@ class ValidationRepository extends ServiceEntityRepository
     public function getValidationOf(Challenge $challenge, User $user){
         return $this->findOneBy(['challenge' => $challenge, 'createdBy' => $user]);
     }
+
+    public function getChallengeValidated(User $user){
+
+        $qb = $this->createQueryBuilder('v')
+            ->innerJoin('v.challenge', 'c')
+            ->select('c.id')
+            ->andWhere('v.createdBy = :user')
+            ->setParameter('user', $user);
+
+        $validations = $qb->getQuery()->getArrayResult();
+        $challrepo = $this->getEntityManager()->getRepository('App:Challenge');
+
+        return array_map(array($challrepo, 'find'), $validations);
+    }
+
+    public function getHarderValidated(User $user){
+        $qb = $this->createQueryBuilder('v')
+            ->innerJoin('v.challenge', 'c')
+            ->select('c.difficulty')
+            ->orderBy('c.difficulty', 'DESC')
+            ->andWhere('v.createdBy = :user')
+            ->setParameter('user', $user);
+
+        $result = $qb->getQuery()->getResult();
+
+        if($result){
+            return $result[0]['difficulty'];
+        }
+
+        return 0;
+    }
+
     // /**
     //  * @return Validation[] Returns an array of Validation objects
     //  */

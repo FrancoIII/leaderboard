@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>
+        Bienvenue sur Leaderboard
+    </h1>
+    <a href="{{ path('challenge') }}">
+        La liste des challenges
+    </a>
+    <a href="{{ path('classement') }}">
+        Le classement des utilisateurs
+    </a>
+{% endblock %}

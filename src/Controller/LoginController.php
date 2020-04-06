@@ -137,6 +137,6 @@ class LoginController extends AbstractController
      * @Route("/", name="default")
      */
     public function index(){
-        return $this->render('base.html.twig');
+        return $this->render('index.html.twig');
     }
 }

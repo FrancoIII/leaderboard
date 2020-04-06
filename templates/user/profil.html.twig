@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ChallengeController!{% endblock %}
-
 {% block content %}
     <div class="card">
-        <div class="header">
-            <h1>Liste des Challenges </h1><br/>
-            Cliquez dessus pour y participer
+        <div class="header" style="text-align: center;">
+            <h1>
+                {{ user.firstName }} "{{ user.username }}" {{ user.lastName }}
+            </h1>
+            <h3>Score: {{ user.score }}, Difficulté maximale: {{ difficulty }}</h3>
         </div>
         <div class="body">
+            <h2>Challenges réussis: {{ nbChall }}</h2>
             <div class="tab-content">
                 {% for chall in challList %}
                     <div class="row">
@@ -26,6 +27,24 @@
                         <a href="{{ path('user_id', {'id':chall.createdBy.id}) }}">
                             <div class="col-md-4">
                                 <h5> Auteur : {{ chall.createdBy.username }}</h5>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <h2>Challenges créés: {{ nbChallC }}</h2>
+            <div class="tab-content">
+                {% for chall in createdChalls %}
+                    <div class="row">
+                        <a href="{{ path('challenge_rep', {'id':chall.id}) }}" class="list-group-item">
+                            <div class="col-md-8">
+                                <h4 class="list-group-item-heading">{{ chall.name }}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="list-group-item-text">
+                                    Difficulté : {{ chall.difficulty }}<br/>
+                                    Récompense : {{ chall.reward }}
+                                </p>
                             </div>
                         </a>
                     </div>
