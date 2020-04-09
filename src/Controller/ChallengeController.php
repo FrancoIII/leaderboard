@@ -118,11 +118,15 @@ class ChallengeController extends AbstractController
     /**
      * @Route("/creer", name="challenge_creer")
      * @Security("is_granted('ROLE_USER')")
+     * @Route("/editer/{id}", name="challenge_editer")
+     * @Security("is_granted('CAN_EDITER', challenge)")
      * @ParamConverter("challenge", class="App\Entity\Challenge")
      */
     public function creer(Request $request, ?Challenge $challenge){
 
-        $challenge = new  Challenge();
+        if($challenge == null){
+            $challenge = new  Challenge();
+        }
 
         $form = $this->createForm(ChallengeType::class, $challenge);
         $form->handleRequest($request);

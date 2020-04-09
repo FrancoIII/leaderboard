@@ -14,12 +14,12 @@
                                 <h4 class="list-group-item-heading">{{ admin.firstName }} "{{ admin.username }}" {{ admin.lastName }}</h4>
                             </div>
                         </a>
-                        <a href="{{ path('demote_admin', {'id':admin.id}) }}">
+                        <a href="{{ path('set_modo', {'id':admin.id}) }}">
                             <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to Modo">
                                 <i class="material-icons">all_out</i>
                             </div>
                         </a>
-                        <a href="{{ path('demote_modo', {'id':admin.id}) }}">
+                        <a href="{{ path('set_user', {'id':admin.id}) }}">
                             <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to User">
                                 <i class="material-icons">all_out</i>
                             </div>
@@ -33,12 +33,12 @@
                                 <h4 class="list-group-item-heading">{{ modo.firstName }} "{{ modo.username }}" {{ modo.lastName }}</h4>
                             </div>
                         </a>
-                        <a href="{{ path('promote_admin', {'id':modo.id}) }}">
+                        <a href="{{ path('set_admin', {'id':modo.id}) }}">
                             <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote Modo to Admin">
                                 <i class="material-icons">all_out</i>
                             </div>
                         </a>
-                        <a href="{{ path('demote_modo', {'id':modo.id}) }}">
+                        <a href="{{ path('set_user', {'id':modo.id}) }}">
                             <div class="col-md-2 align-center">
                                 <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Demote Modo to User">all_out</i>
                             </div>
@@ -52,12 +52,12 @@
                                 <h4 class="list-group-item-heading">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }}</h4>
                             </div>
                         </a>
-                        <a href="{{ path('promote_admin', {'id':user.id}) }}">
+                        <a href="{{ path('set_admin', {'id':user.id}) }}">
                             <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Admin">
                                 <i class="material-icons">all_out</i>
                             </div>
                         </a>
-                        <a href="{{ path('promote_modo', {'id':user.id}) }}">
+                        <a href="{{ path('set_modo', {'id':user.id}) }}">
                             <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Modo">
                                 <i class="material-icons">all_out</i>
                             </div>

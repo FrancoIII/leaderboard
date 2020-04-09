@@ -30,7 +30,7 @@ class UserFixt extends Fixture
                 ->setEmail("$firstName.$lastName$i@ntm.com")
                 ->setUsername("$firstName$lastName$i")
                 ->setPassword($this->encoder->encodePassword($user, $faker->colorName))
-                ->setRoles(array(["ROLE_USER"]))
+                ->setRoles(["ROLE_USER"])
                 ->setScore(0);
 
             $manager->persist($user);
@@ -45,7 +45,7 @@ class UserFixt extends Fixture
                 ->setEmail("$firstName.$lastName$i@ntm.com")
                 ->setUsername("$firstName$lastName$i")
                 ->setPassword($this->encoder->encodePassword($user, $faker->colorName))
-                ->setRoles(array(["ROLE_USER", "ROLE_ADMIN"]))
+                ->setRoles(["ROLE_USER", "ROLE_ADMIN"])
                 ->setScore(0);
 
             $manager->persist($user);
@@ -56,7 +56,7 @@ class UserFixt extends Fixture
             ->setEmail('tocard@ginfo.xyz')
             ->setFirstName('Alex')
             ->setLastName('Pilouf')
-            ->setRoles(array(["ROLE_ADMIN"]))
+            ->setRoles(["ROLE_ADMIN"])
             ->setPassword($this->encoder->encodePassword($user,'faible'))
             ->setScore(1000);
 

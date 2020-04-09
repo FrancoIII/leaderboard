@@ -20,10 +20,7 @@ class ChallengeFixt extends Fixture implements DependentFixtureInterface
         /** @var EntityRepository $repoU */
         /** @var QueryBuilder $queryU */
         $repoU = $manager->getRepository(User::class);
-        $queryU = $repoU->createQueryBuilder('u');
-        $queryU->where("u.roles = :valR")
-            ->setParameter('valR', 'a:1:{i:0;a:2:{i:0;s:9:"ROLE_USER";i:1;s:10:"ROLE_ADMIN";}}');
-        $adminlist = $queryU->getQuery()->getArrayResult();
+        $adminlist = $repoU->findAllRole('ROLE_ADMIN');
 
         for($i=1; $i<=100; $i++){
             $challenge = new Challenge();

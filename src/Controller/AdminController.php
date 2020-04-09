@@ -35,13 +35,14 @@ class AdminController extends AbstractController
             'nbvalidations' => $nbvalidations
         ]);
     }
+
     /**
      * @Route("/admin/users", name="admin_list")
      * @Security("is_granted('ROLE_USER')")
      */
     public function users()
     {
-        $userlist = $this->getDoctrine()->getRepository('App:User')->findAll();
+        $userlist = $this->getDoctrine()->getRepository('App:User')->findAllRole('ROLE_USER');
         $nbusers = sizeof($userlist);
         $adminlist = $this->getDoctrine()->getRepository('App:User')->findAllRole('ROLE_ADMIN');
         $nbadmins = sizeof($adminlist);
@@ -59,30 +60,35 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/promote_admin/{id}", name="promote_admin")
+     * @Route("/set_admin/{id}", name="set_admin")
      */
-    public function promote_admin(User $user){
-        return [];
+    public function set_admin(User $user){
+        $user->setRoles(array(["ROLE_ADMIN"]));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('admin_list');
     }
 
     /**
-     * @Route("/promote_modo/{id}", name="promote_modo")
+     * @Route("/set_modo/{id}", name="set_modo")
      */
-    public function promote_modo(User $user){
-        return [];
+    public function set_modo(User $user){
+        $user->setRoles(array(["ROLE_MODO"]));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('admin_list');
     }
 
     /**
-     * @Route("/demote_admin/{id}", name="demote_admin")
+     * @Route("/set_user/{id}", name="set_user")
      */
     public function demote_admin(User $user){
-        return [];
-    }
-
-    /**
-     * @Route("/demote_modo/{id}", name="demote_modo")
-     */
-    public function demote_modo(User $user){
-        return [];
+        $user->setRoles(array(["ROLE_USER"]));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('admin_list');
     }
 }

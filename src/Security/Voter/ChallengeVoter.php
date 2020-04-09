@@ -10,10 +10,17 @@ use App\Entity\Challenge;
 class ChallengeVoter extends Voter
 {
     const HAS_VALIDATED = 'HAS_VALIDATED';
+    const CAN_EDITER = 'CAN_EDITER';
 
     protected function supports($attribute, $subject)
     {
         if(in_array($attribute, array(self::HAS_VALIDATED)) && $subject instanceof Challenge){
+            return true;
+        }
+        if(in_array($attribute, array(self::CAN_EDITER)) && $subject instanceof Challenge){
+        return true;
+        }
+        if(in_array($attribute, array(self::CAN_EDITER)) && $subject == null){
             return true;
         }
         return false;
@@ -33,6 +40,8 @@ class ChallengeVoter extends Voter
                 // logic to determine if the user can EDIT
                 // return true or false
                 return $this->voteHasValidated($subject, $token);
+            case self::CAN_EDITER:
+                return $this->voteCanEditer($subject, $token);
         }
         return false;
     }
@@ -48,6 +57,9 @@ class ChallengeVoter extends Voter
         if(in_array('ROLE_ADMIN', $token->getRoleNames())){
             return true;
         }
+        if(in_array('ROLE_MODO', $token->getRoleNames())){
+            return true;
+        }
 
         $listValidation = $subject->getValidations();
 
@@ -55,6 +67,28 @@ class ChallengeVoter extends Voter
             if($validation->getCreatedBy() == $user){
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    private function voteCanEditer($subject, TokenInterface $token){
+
+        $user = $token->getUser();
+
+        if($subject == null){
+            return true;
+        }
+
+        if($subject->getCreatedBy() == $user){
+            return true;
+        }
+
+        if(in_array('ROLE_ADMIN', $token->getRoleNames())){
+            return true;
+        }
+        if(in_array('ROLE_MODO', $token->getRoleNames())){
+            return true;
         }
 
         return false;
