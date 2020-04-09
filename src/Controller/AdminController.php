@@ -8,11 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+/**
+ * Class AdminController
+ * @package App\Controller
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-     * @Security("is_granted('ROLE_USER')")
      */
     public function index()
     {
@@ -38,7 +42,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/users", name="admin_list")
-     * @Security("is_granted('ROLE_USER')")
      */
     public function users()
     {
