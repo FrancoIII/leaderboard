@@ -56,7 +56,7 @@ class UserFixt extends Fixture
             ->setEmail('tocard@ginfo.xyz')
             ->setFirstName('Alex')
             ->setLastName('Pilouf')
-            ->setRoles(array(["ROLE_USER", "ROLE_ADMIN"]))
+            ->setRoles(array(["ROLE_ADMIN"]))
             ->setPassword($this->encoder->encodePassword($user,'faible'))
             ->setScore(1000);
 

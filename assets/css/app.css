@@ -5,3 +5,7 @@ body {
 #app-notifs{
     display: none;
 }
+
+.link-btn{
+    cursor: pointer;
+}

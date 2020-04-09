@@ -30,3 +30,7 @@ $('#app-notifs div').each(function(){
         delay: 20000
     })
 });
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

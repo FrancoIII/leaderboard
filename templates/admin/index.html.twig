@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>
+        Panel Admin
+    </h1>
+    <div class="row">
+        <a href="{{ path('admin') }}">
+        <div class="col-md-4">
+            <div class="info-box link-btn">
+                <div class="icon bg-green">
+                    <i class="material-icons">group</i>
+                </div>
+                <div class="content">
+                    <div class="text">Utilisateurs</div>
+                    <div class="number">{{ nbusers }}</div>
+                </div>
+            </div>
+        </div>
+        </a>
+        <a href="{{ path('admin') }}">
+        <div class="col-md-4">
+            <div class="info-box link-btn">
+                <div class="icon bg-light-green">
+                    <i class="material-icons">person</i>
+                </div>
+                <div class="content">
+                    <div class="text">Admins</div>
+                    <div class="number">{{ nbadmins }}</div>
+                </div>
+            </div>
+        </div>
+        </a>
+        <a href="{{ path('admin') }}">
+            <div class="col-md-4">
+                <div class="info-box link-btn">
+                    <div class="icon bg-brown">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Challenges</div>
+                        <div class="number">{{ nbchalls }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a href="{{ path('admin') }}">
+            <div class="col-md-4">
+                <div class="info-box link-btn">
+                    <div class="icon bg-blue">
+                        <i class="material-icons">all_out</i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Tentatives</div>
+                        <div class="number">{{ nbattempts }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="{{ path('admin') }}">
+            <div class="col-md-4">
+                <div class="info-box link-btn">
+                    <div class="icon bg-light-blue">
+                        <i class="material-icons">done</i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Validations</div>
+                        <div class="number">{{ nbvalidations }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endblock %}
