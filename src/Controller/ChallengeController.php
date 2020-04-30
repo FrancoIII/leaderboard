@@ -33,7 +33,6 @@ class ChallengeController extends AbstractController
     /**
      * @Route("/challenge/{id}", name="challenge_rep")
      * @Security("is_granted('ROLE_USER')")
-     * @ParamConverter("challenge", class="App\Entity\Challenge")
      */
     public function repondre(Request $request, Challenge $challenge){
 

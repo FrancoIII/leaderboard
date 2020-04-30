@@ -2,12 +2,34 @@
 
 {% block content %}
     <h1>
-        Bienvenue sur Leaderboard
+        Bienvenue sur Leaderboard !
     </h1>
-    <a href="{{ path('challenge') }}">
-        La liste des challenges
-    </a>
-    <a href="{{ path('classement') }}">
-        Le classement des utilisateurs
-    </a>
+    Sur ce site, tu pourra trouver divers challenges proposés par les autres utilisateurs, et tenter d'y répondre.<br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-5">
+        <a href="{{ path('challenge') }}">
+            <div class="info-box link-btn bg-amber">
+                <div class="icon bg-brown">
+                    <i class="material-icons">folder_shared</i>
+                </div>
+                <div class="content bg-amber">
+                    <h3>La liste des challenges</h3>
+                </div>
+            </div>
+        </a>
+        </div>
+        <div class="col-md-5">
+        <a href="{{ path('classement') }}">
+            <div class="info-box link-btn bg-amber">
+                <div class="icon bg-brown">
+                    <i class="material-icons">people</i>
+                </div>
+                <div class="content bg-amber">
+                    <h3>Le classement des utilisateurs</h3>
+                </div>
+            </div>
+        </a>
+        </div>
+    </div>
 {% endblock %}

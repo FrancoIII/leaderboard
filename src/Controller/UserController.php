@@ -22,7 +22,6 @@ class UserController extends AbstractController
     /**
      * @Route("/user/{id}", name="user_id")
      * @Security("is_granted('ROLE_USER')")
-     * @ParamConverter("user", class="App\Entity\User")
      */
     public function profil(User $user)
     {

@@ -53,6 +53,12 @@
                             <i class="material-icons">power_settings_new</i>
                         </a>
                     </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('login') }}">
+                            <i class="material-icons">power_settings_new</i>
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

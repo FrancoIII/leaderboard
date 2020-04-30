@@ -12,11 +12,11 @@
         <div class="body">
             {{ form_start(form) }}
             <div class="body align-center">
-                {{ form_row(form.name) }}
-                {{ form_row(form.description) }}
-                {{ form_row(form.password) }}
-                {{ form_row(form.difficulty) }}
-                {{ form_row(form.reward) }}
+                {{ form_row(form.name, {'label': 'Nom'}) }}
+                {{ form_row(form.description, {'label': 'Description'}) }}
+                {{ form_row(form.password, {'label': 'Solution'}) }}
+                {{ form_row(form.difficulty, {'label': 'Difficulté (de 1 à 5)'}) }}
+                {{ form_row(form.reward, {'label': 'Récompense'}) }}
             </div>
             <div class="card-footer align-center">
                 <button type="submit" class="btn bg-green waves-effect btn-card-footer">
