@@ -9,3 +9,161 @@ body {
 .link-btn{
     cursor: pointer;
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 0; /* Margin bottom by footer height */
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    height: 40px; /* Set the fixed height of the footer here */
+    line-height: 40px; /* Vertically center the text there */
+@media (max-width: 768px) {
+    height: 20px;
+    line-height: 20px;
+}
+}
+
+.footer-content{
+    border-top: 1px solid #eee;
+    background-color: #fff;
+    font-size: 8pt;
+    text-align: center;
+}
+
+.content{
+    margin-left:0 !important;
+}
+
+h3{
+    font-weight: lighter !important;
+}
+
+.add {
+    padding:1px;
+}
+
+a {
+    margin-bottom: 0 !important;
+}
+
+.author h5{
+    color : #00BCD4;
+    margin:3px !important;
+}
+
+.author:hover {
+    color : #00BCD4;
+
+}
+
+.description {
+    color : #AAAAAA;
+    text-align :left;
+}
+
+.user {
+    font-size : 20px;
+    margin-right : 5px;
+}
+
+.badgeuser {
+    font-size : 15px;
+}
+
+.labeluser {
+    font-size:20px;
+    margin-right:10px;
+    margin-left:10px;
+}
+
+.users{
+    color : #00BCD4;
+}
+
+.users:hover{
+    color : #00BCD4;
+}
+
+.trophy {
+    font-size : 50px;
+    color : #FCCA14;
+}
+
+.gold {
+    background-color : #FFD700 !important;
+}
+
+.txtgold {
+    color : #FFD700 !important;
+}
+
+
+.silver {
+    background-color : #A9A9A9 !important;
+}
+
+.txtsilver {
+    color : #A9A9A9 !important;
+}
+
+
+
+.bronze {
+    background-color : #968561 !important;
+}
+
+.txtbronze {
+    color: #968561 !important;
+}
+
+.first {
+    font-size : 30px;
+}
+
+.bleu {
+    background-color: #A0ACE6 !important;
+}
+
+.bleuvert {
+    background-color: #89CCDC !important;
+}
+
+.vert {
+    background-color: #74EBD5 !important;
+}
+
+.bleu1 {
+    background-color:  #0277bd !important;
+}
+
+.mauve1 {
+    background-color: #0097a7 !important;
+}
+
+.rose1 {
+    background-color: #01579b !important;
+}
+
+.corail1 {
+    background-color: #00bcd4 !important;
+}
+
+.jaune1 {
+    background-color: #039be5 !important;
+}
+
+.listechall {
+    display : inline-block;
+}
+
+.creer {
+    margin-top:15px;
+}
+

@@ -23,7 +23,7 @@
           rel="stylesheet">
 </head>
 
-<body {% block additionnal_body_block %}{% endblock %} class="theme-brown {% block additionnal_body_class %}{% endblock %}">
+<body {% block additionnal_body_block %}{% endblock %} class="theme-cyan {% block additionnal_body_class %}{% endblock %}">
 
 <nav class="navbar">
     <div class="container-fluid">
@@ -42,12 +42,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <li>
-                        <a href="">
-                            <i class="material-icons">settings</i>
+                        <a href="{{ path('admin') }}">
+                            <i class="material-icons">vpn_key</i>
                         </a>
                     </li>
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
                     <li>
                         <a href="{{ path('logout') }}">
                             <i class="material-icons">power_settings_new</i>

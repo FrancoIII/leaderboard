@@ -33,4 +33,4 @@ $('#app-notifs div').each(function(){
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-})
+});

@@ -3,67 +3,116 @@
 {% block content %}
     <div class="card">
         <div class="header">
-            <h1>Admins, Modos, Users </h1>
+            <h1>Administrateurs, modérateurs et utilisateurs</h1>
         </div>
         <div class="body">
             <div class="tab-content">
-                {% for admin in adminlist %}
-                    <div class="row">
-                        <a href="{{ path('user_id', {'id':admin.id}) }}" class="list-group-item">
-                            <div class="col-md-4">
-                                <h4 class="list-group-item-heading">{{ admin.firstName }} "{{ admin.username }}" {{ admin.lastName }}</h4>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_modo', {'id':admin.id}) }}">
-                            <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to Modo">
-                                <i class="material-icons">all_out</i>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_user', {'id':admin.id}) }}">
-                            <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to User">
-                                <i class="material-icons">all_out</i>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-                {% for modo in modolist %}
-                    <div class="row">
-                        <a href="{{ path('user_id', {'id':modo.id}) }}" class="list-group-item">
-                            <div class="col-md-4">
-                                <h4 class="list-group-item-heading">{{ modo.firstName }} "{{ modo.username }}" {{ modo.lastName }}</h4>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_admin', {'id':modo.id}) }}">
-                            <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote Modo to Admin">
-                                <i class="material-icons">all_out</i>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_user', {'id':modo.id}) }}">
-                            <div class="col-md-2 align-center">
-                                <i class="material-icons" data-toggle="tooltip" data-placement="top" title="Demote Modo to User">all_out</i>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-                {% for user in userlist %}
-                    <div class="row">
-                        <a href="{{ path('user_id', {'id':user.id}) }}" class="list-group-item">
-                            <div class="col-md-4">
-                                <h4 class="list-group-item-heading">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }}</h4>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_admin', {'id':user.id}) }}">
-                            <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Admin">
-                                <i class="material-icons">all_out</i>
-                            </div>
-                        </a>
-                        <a href="{{ path('set_modo', {'id':user.id}) }}">
-                            <div class="col-md-2 align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Modo">
-                                <i class="material-icons">all_out</i>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                <h2><span class="label bg-red">Administrateur</span></h2>
+
+                <div class="body table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for admin in adminlist %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('user_id', {'id':admin.id}) }}" >
+                                        <h4 class="users">{{ admin.firstName }} "{{ admin.username }}" {{ admin.lastName }}</h4>
+
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('set_modo', {'id':admin.id}) }}">
+                                    <div class="align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to Modo">
+                                        <i class="fas fa-user-lock"></i>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('set_user', {'id':admin.id}) }}">
+                                    <div class="align-center" data-toggle="tooltip" data-placement="top" title="Demote Admin to User">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <h2><span class="label bg-orange">Modérateur</span></h2>
+
+                <div class="body table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for modo in modolist %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('user_id', {'id':modo.id}) }}" >
+                                        <h4 class="users">{{ modo.firstName }} "{{ modo.username }}" {{ modo.lastName }}</h4>
+
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('set_admin', {'id':modo.id}) }}">
+                                        <div class="align-center" data-toggle="tooltip" data-placement="top" title="Promote Modo to Admin">
+                                            <i class="fas fa-user-shield"></i>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('set_user', {'id':modo.id}) }}">
+                                        <div class="align-center" data-toggle="tooltip" data-placement="top" title="Demote Modo to User">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <h2><span class="label bg-light-green">Utilisateur</span></h2>
+
+                <div class="body table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for user in userlist %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('user_id', {'id':user.id}) }}" >
+                                        <h4 class="users">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }}</h4>
+
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('set_admin', {'id':user.id}) }}">
+                                        <div class="align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Admin">
+                                            <i class="fas fa-user-shield"></i>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('set_modo', {'id':user.id}) }}">
+                                        <div class="align-center" data-toggle="tooltip" data-placement="top" title="Promote User to Modo">
+                                            <i class="fas fa-user-lock"></i>
+                                        </div>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
     </div>

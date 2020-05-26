@@ -13,14 +13,15 @@
             {{ form_start(form) }}
             <div class="body align-center">
                 {{ form_row(form.name, {'label': 'Nom'}) }}
+                <p class="description">Description *</p>
                 {{ form_row(form.description, {'label': 'Description'}) }}
                 {{ form_row(form.password, {'label': 'Solution'}) }}
                 {{ form_row(form.difficulty, {'label': 'Difficulté (de 1 à 5)'}) }}
                 {{ form_row(form.reward, {'label': 'Récompense'}) }}
             </div>
             <div class="card-footer align-center">
-                <button type="submit" class="btn bg-green waves-effect btn-card-footer">
-                    <span>Créer !</span></button>
+                <button type="submit" class="btn bg-light-green waves-effect btn-card-footer">
+                    <i class="material-icons">save</i> <span class="add">Créer !</span> </button>
             </div>
             {{ form_end(form) }}
         </div>
