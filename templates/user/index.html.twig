@@ -5,25 +5,56 @@
 {% block content %}
     <div class="card">
         <div class="header">
-            <h1>Classement des utilisateurs </h1>
+            <h1 class="text-center">Classement des utilisateurs </h1>
         </div>
         <div class="body">
-            <div class="tab-content">
-                {% for user in listUser %}
-                    <div class="row">
-                        <a href="{{ path('user_id', {'id':user.id}) }}" class="list-group-item">
-                            <div class="col-md-4">
-                                <h4 class="list-group-item-heading">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }}</h4>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="list-group-item-text">
-                                    Score : {{ user.score }}
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+            <div class="text-center">
+                <i class="fas fa-trophy trophy"></i>
             </div>
+
+            {% set comp = 0  %}
+            {% for user in listUser %}
+            {% set comp = comp + 1 %}
+                {% if comp == 1 %}
+                    <a href="{{ path('user_id', {'id':user.id}) }}" class="users">
+                        <p class="user text-center first txtgold">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }} <span class="badge bg-cyan gold badgeuser">Score : {{ user.score }}</span>
+                        </p>
+                    </a>
+                {% endif %}
+                {% if comp == 2 %}
+                    <a href="{{ path('user_id', {'id':user.id}) }}" class="users">
+                        <p class="user text-center first txtsilver">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }} <span class="badge bg-cyan silver badgeuser">Score : {{ user.score }}</span></p>
+                    </a>
+                {% endif %}
+                {% if comp == 3 %}
+                    <a href="{{ path('user_id', {'id':user.id}) }}" class="users">
+                        <p class="user text-center first txtbronze">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }} <span class="badge bg-cyan bronze badgeuser">Score : {{ user.score }}</span></p>
+                    </a>
+                 {% endif %}
+            {% endfor %}
+            <div class="body table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    {% set comp = 0  %}
+                    {% for user in listUser %}
+                    {% set comp = comp + 1 %}{% if ((comp != 1) and (comp != 2) and (comp !=3)) %}
+                        <tr>
+                            <th scope="row">
+                                    <span class="labeluser">{{comp}}ème</span>
+                               </th>
+                            <td><a href="{{ path('user_id', {'id':user.id}) }}" class="users">
+                                    <span class="user">{{ user.firstName }} "{{ user.username }}" {{ user.lastName }}</span></a></td>
+                            <td><span class="badge bg-cyan badgeuser">Score : {{ user.score }}</span></td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
         </div>
     </div>
 {% endblock %}

@@ -6,37 +6,41 @@
     <div class="card">
         <div class="header">
             <div class="row">
-                <div class="col-md-8"><h1>Liste des Challenges </h1></div>
-                <form action="{{ path('challenge_creer') }}" method="get" class="col-md-4">
-                    <button type="submit" class="btn bg-amber waves-effect btn-lg">Créer un Challenge</button>
-                </form>
+                <div class="col-md-10">
+                    <h1 class="listechall">Liste des Challenges</h1>
+
+                </div>
+                <div class=col-md-2">
+                    <a class="btn bg-light-green waves-effect creer" href="{{ path('challenge_creer') }}">
+                        <i class="material-icons">add</i> <span class="add"><h5 style="font-weight:normal;display:inline-block;margin:0">Créer un Challenge</h5></span>
+                    </a>
+                </div>
             </div>
-            Cliquez dessus pour y participer
+
         </div>
         <div class="body">
-            <div class="tab-content">
-                {% for chall in challList %}
-                <a class="col-md-8 list-group-item" href="{{ path('challenge_rep', {'id':chall.id}) }}" style="height: 100%">
-                    <div class="row list-group-item">
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading">{{ chall.name }}</h4>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="list-group-item-text">
-                                    Difficulté : {{ chall.difficulty }}<br/>
-                                    Récompense : {{ chall.reward }}
-                                </p>
-                            </div>
-
-                        <a class="col-md-4 list-group-item" href="{{ path('user_id', {'id':chall.createdBy.id}) }}" style="height: 100%">
-                            <div class="">
-                                <h5> Auteur : {{ chall.createdBy.username }}</h5>
-                            </div>
-                        </a>
-                    </div>
-                </a>
-                {% endfor %}
+            <div class="body table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    {% for chall in challList %}
+                    <tr>
+                        <th scope="row">{{ chall.name }}</th>
+                        <td><span  data-toggle="tooltip" data-placement="top" title="" data-original-title="Difficulté">{% for i in 1..chall.difficulty  %} <i class="fas fa-star"></i> {% endfor %}
+                            {% if chall.difficulty != 5 %}
+                                {% for i in 1..(5-chall.difficulty)  %} <i class="far fa-star" ></i> {% endfor %}
+                            {% endif %}</span>
+                        </td>
+                        <td>Récompense : {{ chall.reward }}</td>
+                        <td><a class="author" href="{{ path('user_id', {'id':chall.createdBy.id}) }}" >
+                                    <h5> Auteur : {{ chall.createdBy.username }}</h5>
+                            </a></td>
+                        <td><a class="btn bg-cyan" href="{{ path('challenge_rep', {'id':chall.id}) }}"><i class="material-icons">input</i><span class="add">Essayer</span></a> </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
+
         </div>
     </div>
 {% endblock %}

@@ -2,40 +2,42 @@
 
 {% block content %}
     <h1>
-        Panel Admin
+        Panel d'administration
     </h1>
     <div class="row">
         <a href="{{ path('admin') }}">
-        <div class="col-md-4">
-            <div class="info-box link-btn">
-                <div class="icon bg-green">
-                    <i class="material-icons">group</i>
-                </div>
-                <div class="content">
-                    <div class="text">Utilisateurs</div>
-                    <div class="number">{{ nbusers }}</div>
-                </div>
-            </div>
-        </div>
-        </a>
-        <a href="{{ path('admin') }}">
-        <div class="col-md-4">
-            <div class="info-box link-btn">
-                <div class="icon bg-light-green">
-                    <i class="material-icons">person</i>
-                </div>
-                <div class="content">
-                    <div class="text">Admins</div>
-                    <div class="number">{{ nbadmins }}</div>
+            <div class="col-md-4">
+                <div class="info-box-3 link-btn bg-cyan mauve1 hover-zoom-effect">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Utilisateurs</div>
+                        <div class="number">{{ nbusers }}</div>
+                    </div>
                 </div>
             </div>
-        </div>
         </a>
+
+        <a href="{{ path('admin_list') }}">
+            <div class="col-md-4">
+                <div class="info-box-3 link-btn bg-cyan corail1 hover-zoom-effect">
+                    <div class="icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="content">
+                        <div class="text">Admins</div>
+                        <div class="number">{{ nbadmins }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         <a href="{{ path('admin') }}">
             <div class="col-md-4">
-                <div class="info-box link-btn">
-                    <div class="icon bg-brown">
-                        <i class="material-icons">search</i>
+                <div class="info-box-3 link-btn bg-cyan jaune1 hover-zoom-effect">
+                    <div class="icon">
+                        <i class="fas fa-list-ol"></i>
                     </div>
                     <div class="content">
                         <div class="text">Challenges</div>
@@ -44,13 +46,15 @@
                 </div>
             </div>
         </a>
+
     </div>
+
     <div class="row">
         <a href="{{ path('admin') }}">
             <div class="col-md-4">
-                <div class="info-box link-btn">
-                    <div class="icon bg-blue">
-                        <i class="material-icons">all_out</i>
+                <div class="info-box-3 link-btn bg-cyan bleu1 hover-zoom-effect">
+                    <div class="icon">
+                        <i class="fas fa-crosshairs"></i>
                     </div>
                     <div class="content">
                         <div class="text">Tentatives</div>
@@ -59,11 +63,12 @@
                 </div>
             </div>
         </a>
+
         <a href="{{ path('admin') }}">
             <div class="col-md-4">
-                <div class="info-box link-btn">
-                    <div class="icon bg-light-blue">
-                        <i class="material-icons">done</i>
+                <div class="info-box-3 link-btn bg-cyan rose1 hover-zoom-effect">
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="content">
                         <div class="text">Validations</div>
@@ -72,5 +77,7 @@
                 </div>
             </div>
         </a>
+
+
     </div>
 {% endblock %}

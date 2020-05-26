@@ -11,27 +11,24 @@
             </div>
             <div class="col-md-4">
             <div class="card">
-                <div class="header bg-brown align-center">
+                <div class="header bg-cyan align-center">
                     <h2>
-                        Login
+                        Connexion
                     </h2>
                 </div>
                 <div class="body align-center">
                     <form action="{{ path('login') }}" method="post">
-                        <input type="text" placeholder="Username" class="form-control" name="_username" required />
+                        <input type="text" placeholder="Nom d'utilisateur" class="form-control" name="_username" required />
                         <br/>
                         <input type="password" placeholder="Mot de passe" class="form-control" name="_password" required />
                         <br/>
-                        <br/>
-                        <button type="submit" class="btn btn-success waves-effect btn-lg">Login</button>
+                        <button type="submit" class="btn waves-effect btn-lg bg-light-green">Se connecter</button>
+                        <a href="{{ path('loginMy') }}" class="btn waves-effect btn-lg bg-indigo">Connexion via MyCA</a>
+                        <a href="{{ path('registration') }}" class="btn waves-effect btn-lg bg-amber"> Créer un compte </a>
                     </form>
-                    <br/>
-                    <br/>
-                    <form action="{{ path('loginMy') }}" method="get">
-                        <button type="submit" class="btn bg-indigo waves-effect btn-lg">Connexion via MyCA</button>
-                    </form>
+
                 </div>
-                <a href="{{ path('registration') }}"> Créer un compte </a>
+
             </div>
             </div>
             <div class="col-md-4">
